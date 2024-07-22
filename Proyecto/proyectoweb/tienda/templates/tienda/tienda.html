@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container"> <!-- Apertura de container -->
+       <div style="float: right;">
+<!--       <p style="color: white;">Total: ${{ import_total_carro }}</p> -->
+            {% if request.user.is_authenticated %}
+                {% include 'carro/widget.html' %} <!-- Sirve para relacionar el widget.html con la plantilla tienda.html -->
+            {% else %}
+                <span class="alert alert-danger text-center">Debe logearse</span>
+            {% endif %}
+    </div>
+      <div class="row"> <!-- Apertura de filas -->
+        {% for producto in productos %}
+          <div class="col-md-3" style="margin: 10px 10px;"> <!-- Apertura de columnas -->
+            <div class="card" style="width: 100%; text-align: center;"> <!-- Clase card de Bootstrap apertura -->
+              <img src="{{ producto.imagen.url }}">
+              <div class="card-body">
+                <h6 class="card-title" style="font-weight: bold;">{{ producto.categorias }}</h6>
+                <h6 class="card-title">{{ producto.nombre }}</h6>
+                <p class="text">$&nbsp;{{ producto.precio }}</p>
+              </div>
+              <div class="card-footer text-center">
+                <a href="{% url 'carro:agregar' producto.id %}" class="btn btn-success" style="background-color: rgba(24, 64, 8, 0.8);">Agregar al carrito</a>
+              </div>
+            </div> <!-- Cierre card -->
+          </div> <!-- Cierre de columnas -->
+        {% endfor %}
+      </div> <!-- Cierre de filas -->
+    </div><!-- Cierre container -->
+{% endblock %}

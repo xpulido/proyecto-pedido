@@ -1,0 +1,53 @@
+<p style="color: white;">Este es el carrito</p>
+<table class="table-bordered" style="color: white;">
+    <thead>
+        <tr>
+            <th colspam="3" class="text-center">
+                Carro compra
+            </th>
+        </tr>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Suma</th>
+        </tr>
+        <thead>
+            <tbody>
+                {% if request.session.carro.items %} <!-- Evaluar si hay items o articulos en el carro -->
+                    {% for key,value in request.session.carro.items %} <!-- se peuede ver a futuro ver las funciones del carro -->
+                        <tr class="texte-center">
+                            <td>{{value.nombre}}</td>
+                            <td>{{value.cantidad}}</td>
+                            <td>
+                                <a href="{% url 'carro:agregar' value.producto_id %}" class="btn btn-success">+</a>
+                                <a href="{% url 'carro:restar' value.producto_id %}" class="btn btn-success">-</a><br>
+                                ${{value.precio}}
+                            </td>
+                        </tr>                      
+                    {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="3">
+                        <div class="alert alert-danger text-center"> <!-- saber cuando no hay elementos en el carro y es de bootstarp -->
+                            Sin productos
+                        </div>
+                    </td>
+                </tr>
+                {% endif %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        total:${{importe_total_carro}}
+                    </td>
+                </tr>
+                <!-- si no tengo productos en el carrito  -->
+                {% if request.session.carro.items%}
+                <tr>
+                    <td colspan="3" style="text-align: center;">
+                        <a href="{% url 'procesar_pedidos' %}"><i class="bi bi-cart-plus"></i> Comprar</a>
+                    </td>
+                </tr>
+                {% endif %}
+            </tfoot>
+</table

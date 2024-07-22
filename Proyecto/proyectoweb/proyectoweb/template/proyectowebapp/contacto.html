@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+{% if "valido" in request.GET  %}
+<p style="color: bisque"> Informacion pasada correctamente</p>
+
+{% endif %}
+<div class="contenedor">
+    <form action="" method="post"style="text-align: center;" >{% csrf_token %}
+        <table style="margin: 20px auto; color: aliceblue;" >{{miformulario.as_table}}</table>
+        <input  type="submit"  value="enviar">
+    </form>
+</div>
+<p style="color: aliceblue;">{{request.POST}}</p>
+<!-- <link rel="stylesheet" href="{% static 'C:/Proyecto/Proyecto/proyectoweb/proyectowebapp/static/proyectowebapp/css/estilo_de_contacto.css' %}">
+
+<body>
+    <br><form class="formulario" action="/contacto/" method="post"> {% csrf_token %}
+        <h1>Contactanos</h1>
+
+        <p>Asunto <input type="text" name="asunto"></p>
+        <p>Nombre <input type="text" name="nombre"></p>
+        <p>Email <input type="text" name="email"></p>
+        <p>Mensaje <textarea name="mensaje" cols="30" rows="10"></textarea></p>
+        <input type="submit" value="Enviar">
+    </form> <br>
+
+</body> -->
+
+{% endblock %}

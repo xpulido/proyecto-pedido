@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<style>
+      table {border-collapse: collapse;
+        width: 60%;
+        margin: auto;}
+    td, th {border: 1px solid #d06262;
+        padding: 8px;
+        text-align: left;
+        color: rgb(69, 136, 194);}
+    th {background-color:green;color: white;}
+    a.btn.btn-success {
+        display: block;
+        margin: auto;
+        text-align: center;
+        width: 150px;}
+</style>
+<br><table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th>Imagen</th>
+      <th>Fecha de Creacion</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if productos %}
+      {% for producto in productos %}
+      <tr>
+        <td>{{producto.id}}</td>
+        <td>{{producto.nombre}}</td>
+        <td>{{producto.precio}}</td>
+        <td><img src="{{producto.imagen.url}}"></td>
+        <td>{{producto.created|date:"d/m/Y"}}</td>
+      </tr>  
+  </tbody>     
+      {% endfor %}
+      {% else %}
+        <h1>No hay productos</h1>
+    {% endif %}
+</table>
+<a class="btn btn-success" href="{% url 'reporte' %}">Exportar a EXCEL</a>
+<a class="btn btn-success" href="{% url 'pdf' %}"> exportar a pdf</a>
+
+<br>
+  {% endblock %}

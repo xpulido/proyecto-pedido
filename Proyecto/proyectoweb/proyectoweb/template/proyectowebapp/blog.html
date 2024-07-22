@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container">
+    {% for post in posts %}
+    <section class="page-section clearfix">
+      <div class="container">
+        <div class="intro">
+          <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{post.imagen.url}}" alt="" style="width: 60%;">
+          <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+            <h2 class="section-heading mb-4" >
+              <span class="section-heading-lower">{{post.titulo}}</span>
+              <span class="section-heading-upper">{{post.contenido}}</span>
+          </h2>
+          <div style="text-align: left;">
+            Autor: {{post.autor}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- <div>
+    <h1>{{serv.titulo}}</h1>
+</div>
+<p>{{serv.contenido}}</p>
+<img src="{{serv.imagen.url}}"> -->
+
+{%  endfor %}
+
+<section  style="color: white; text-align: center; border: solid 1px; width: 58%; position: relative; left: 400px;">
+  <h5>Categorias: </h5>
+  {% for post in posts %}
+    {% for categoria in  posts.categorias.all %}
+        <a href="{% url 'filtrar_por_categoria' categoria.nombre %}"></a>&nbsp;&nbsp;&nbsp;
+    {% endfor %}
+  {% endfor %}
+  <a href="{% url 'table' %}">ver todas las categorias</a>
+  <a href="{% url 'blog' %}">post completos</a>
+</section>
+</div>
+
+
+{% endblock %}

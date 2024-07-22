@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <style>
+        .table{
+            width: 100%;
+            border-collapse: collapse;
+            color: white;
+        }
+        .table th,
+        .table td {
+            border: 1px solid whitesmoke;
+            padding: 8px;
+            text-align: left;
+         }
+
+         .table th{
+            background-color: green;
+         }
+
+         .table img{
+            max-width: 100px;
+            display: block;
+            margin: 0 auto;
+         }
+    </style>
+
+    <table class="table">
+        <br>
+        <thead>
+            <tr>
+                <th scope="col">Categoria</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Contenido</th>
+                <th scope="col">Imagen</th>
+                <th scope="col">Autor</th>
+            </tr>
+        </thead>
+        <body>
+            {% for post in posts %}
+            <tr>
+                <td>
+                    {% for categoria in pots.Categorias.all %}
+                            {{ categoria.Nombre }}
+                    {% endfor %}
+                </td>
+                <td>{{ post.titulo }}</td>
+                <td>{{ post.contenido }} </td>
+                <td><img src="{{ post.imagen.url}}" ></td>
+                <td>{{ post.autor}}</td>
+            </tr>
+            {% endfor %}
+        </body>
+    </table>
+<div style="text-align: center;">
+    <a href="{% url 'blog' %}">post completos</a>
+</div>
+{% endblock %}
+</div>
